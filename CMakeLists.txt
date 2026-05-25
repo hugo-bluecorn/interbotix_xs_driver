@@ -70,6 +70,7 @@ install(
 )
 
 ament_export_dependencies(
+  dynamixel_workbench_toolbox
   yaml-cpp
 )
 
