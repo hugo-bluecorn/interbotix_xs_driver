@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.14)
 project(interbotix_xs_driver LANGUAGES CXX)
 
 if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 17)
+  set(CMAKE_CXX_STANDARD 20)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -29,12 +29,15 @@ add_library(
     src/xs_logging.cpp
 )
 
-ament_target_dependencies(${PROJECT_NAME} ${DEPENDENCIES})
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
-target_link_libraries(${PROJECT_NAME} yaml-cpp)
+target_link_libraries(${PROJECT_NAME}
+  PUBLIC
+  dynamixel_workbench_toolbox::dynamixel_workbench_toolbox
+  yaml-cpp
+)
 
 install(
   TARGETS ${PROJECT_NAME}
